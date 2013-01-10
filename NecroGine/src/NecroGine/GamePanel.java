@@ -35,6 +35,7 @@ long gameover = 0;
 
 Vector<Sprite> actors;
 Vector<Sprite> painter;
+Vector<Solid> solids;
 
 boolean up;
 boolean down;
@@ -49,8 +50,9 @@ SoundLib soundlib;
 
       //TESTACTORS*****************
       
-      Test loller;
-
+       Player p;    
+       Block s;
+       
       //TESTACTORS*****************
 
 
@@ -82,7 +84,7 @@ SoundLib soundlib;
       
       actors  = new Vector<Sprite>();
       painter = new Vector<Sprite>();
-
+      solids  = new Vector<Solid>();
       
       //Adding sounds to library//
       soundlib = new SoundLib();
@@ -100,9 +102,11 @@ SoundLib soundlib;
             
       //TESTACTORS*****************
       
-      loller = new Test(imagelib.getImage("lol"),100,100,1000,this);
-      actors.add(loller);
-      
+       p = new Player(imagelib.getImage("lol"),100,500,500,this);
+       s = new Block(0,0,1000,30);
+       actors.add(p);
+       solids.add(p);
+       
       //TESTACTORS*****************
       
       
@@ -150,6 +154,9 @@ SoundLib soundlib;
               doLogic();
               moveObjects();
               cloneVectors();
+              //******TEST
+              p.computeMovement(this);
+              //******TEST
             }
             
             repaint();
@@ -172,11 +179,11 @@ SoundLib soundlib;
               it.remove();
             }
         }
-            for (int i = 0;i < actors.size();i++){
-                for (int n = i+1; n < actors.size(); n++){
-                    
-                    Sprite s1 = actors.elementAt(i);
-                    Sprite s2 = actors.elementAt(n);
+            for (int i = 0;i < solids.size();i++){
+                for (int n = i+1; n < solids.size(); n++){
+             //*****ENABLED SOLID COLLISION CHECKING       
+                    Solid s1 = solids.elementAt(i);
+                    Solid s2 = solids.elementAt(n);
                     
                     s1.collideWith(s2);
                     

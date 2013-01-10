@@ -12,7 +12,7 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-public abstract class Sprite extends Rectangle2D.Double implements Drawable, Movable  {
+public abstract class Sprite extends Solid implements Drawable, Movable  {
 long animation = 0;
 long delay;
 GamePanel parent;
@@ -98,5 +98,4 @@ boolean remove;
     }
 
     public abstract boolean collideWith(Sprite s);
-
 }
